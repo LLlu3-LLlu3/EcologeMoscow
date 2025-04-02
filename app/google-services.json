@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1004743573728",
+    "firebase_url": "https://esp-firebase-demo-e1e90-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "esp-firebase-demo-e1e90",
+    "storage_bucket": "esp-firebase-demo-e1e90.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004743573728:android:9f65cd33460b74e2d25085",
+        "android_client_info": {
+          "package_name": "com.example.ecologemoscow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEgam34nKG-zWMNgbR_j48_0KuowuL5g8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
