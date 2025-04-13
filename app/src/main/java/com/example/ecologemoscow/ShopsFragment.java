@@ -2,6 +2,9 @@ package com.example.ecologemoscow;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,8 +51,8 @@ public class ShopsFragment extends Fragment implements OnMapReadyCallback {
         shopsRef = FirebaseDatabase.getInstance().getReference("shops");
         shops = new ArrayList<>();
 
-        // Создаем кастомный маркер
-        customMarkerIcon = getBitmapDescriptor(R.drawable.blackhole);
+        //
+        customMarkerIcon = getBitmapDescriptor(R.drawable.iconshop);
 
         // Инициализация карты
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -77,12 +80,33 @@ public class ShopsFragment extends Fragment implements OnMapReadyCallback {
         Drawable vectorDrawable = ContextCompat.getDrawable(getContext(), vectorResId);
         if (vectorDrawable == null) return null;
         
-        vectorDrawable.setBounds(0, 0, 100, 100);
-        Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        // Размер иконки
+        int size = 120;
+        
+        // Создаем квадратный битмап
+        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
+        
+        // Устанавливаем размеры drawable
+        vectorDrawable.setBounds(0, 0, size, size);
+        
+        // Рисуем drawable на канвасе
         vectorDrawable.draw(canvas);
         
-        return BitmapDescriptorFactory.fromBitmap(bitmap);
+        // Создаем круглый битмап
+        Bitmap outputBitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+        Canvas outputCanvas = new Canvas(outputBitmap);
+        
+        // Настраиваем Paint для создания круглой маски
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        outputCanvas.drawCircle(size / 2f, size / 2f, size / 2f, paint);
+        
+        // Настраиваем Paint для наложения изображения
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        outputCanvas.drawBitmap(bitmap, 0, 0, paint);
+        
+        return BitmapDescriptorFactory.fromBitmap(outputBitmap);
     }
 
     @Override
@@ -136,6 +160,15 @@ public class ShopsFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void showShopInfo(Shop shop) {
+        // Скрываем BottomNavFragment
+        Fragment bottomNavFragment = getParentFragmentManager().findFragmentById(R.id.bottom_nav_container);
+        if (bottomNavFragment != null && bottomNavFragment.isVisible()) {
+            getParentFragmentManager()
+                    .beginTransaction()
+                    .hide(bottomNavFragment)
+                    .commit();
+        }
+
         // Заполняем информацию о магазине
         TextView shopName = shopInfoView.findViewById(R.id.shop_name);
         TextView shopTime = shopInfoView.findViewById(R.id.shop_time);
@@ -146,6 +179,21 @@ public class ShopsFragment extends Fragment implements OnMapReadyCallback {
         // Показываем информацию
         shopInfoView.setVisibility(View.VISIBLE);
         isInfoVisible = true;
+
+        // Обработчик закрытия окна информации
+        View closeButton = shopInfoView.findViewById(R.id.close_shop_info);
+        closeButton.setOnClickListener(v -> {
+            shopInfoView.setVisibility(View.GONE);
+            isInfoVisible = false;
+
+            // Показываем BottomNavFragment
+            if (bottomNavFragment != null) {
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .show(bottomNavFragment)
+                        .commit();
+            }
+        });
     }
 
     // Класс для хранения информации о магазине

@@ -40,6 +40,18 @@
         app:layout_constraintStart_toStartOf="@+id/textView" />
 
     <Button
+        android:id="@+id/qr_scan_button"
+        android:layout_width="118dp"
+        android:layout_height="64dp"
+        android:text="Сканировать QR-код"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.458"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.363" />
+
+    <Button
         android:id="@+id/butlogout"
         android:layout_width="118dp"
         android:layout_height="64dp"
