@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Gorky Park - Дерево с лавочкой -->
+    <vector name="park_gorky" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#4CAF50"
+            android:pathData="M12,2L4.5,20.29l0.71,0.71L12,18l6.79,3 0.71,-0.71z"/>
+        <path
+            android:fillColor="#8D6E63"
+            android:pathData="M4,22h16v2H4z"/>
+    </vector>
+
+    <!-- Sparrow Hills - Горы -->
+    <vector name="sparrow_hills" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#4CAF50"
+            android:pathData="M2,20L12,4L22,20z"/>
+    </vector>
+
+    <!-- Losiny Ostrov - Лес -->
+    <vector name="losiny_ostrov" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#4CAF50"
+            android:pathData="M4,20L8,12L12,20L16,12L20,20z"/>
+    </vector>
+
+    <!-- Bitsevsky Forest - Сосны -->
+    <vector name="bitsevsky_forest" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#4CAF50"
+            android:pathData="M6,20L6,16L12,4L18,16L18,20z"/>
+    </vector>
+
+    <!-- Serebryany Bor - Сосна -->
+    <vector name="serebryany_bor" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#4CAF50"
+            android:pathData="M12,2L6,16L12,14L18,16z"/>
+    </vector>
+
+    <!-- Tsaritsyno - Дворец -->
+    <vector name="tsaritsyno" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#8D6E63"
+            android:pathData="M4,20h16v4H4z"/>
+        <path
+            android:fillColor="#8D6E63"
+            android:pathData="M8,16h8v4H8z"/>
+        <path
+            android:fillColor="#8D6E63"
+            android:pathData="M10,12h4v4h-4z"/>
+    </vector>
+
+    <!-- Sokolniki - Сокол -->
+    <vector name="sokolniki" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#4CAF50"
+            android:pathData="M12,2L4,20L12,16L20,20z"/>
+    </vector>
+
+    <!-- Setun River - Река с деревьями -->
+    <vector name="setun_river" xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+        <path
+            android:fillColor="#2196F3"
+            android:pathData="M2,12h20v4H2z"/>
+        <path
+            android:fillColor="#4CAF50"
+            android:pathData="M4,8L8,4L12,8L16,4L20,8z"/>
+    </vector>
+</resources> 

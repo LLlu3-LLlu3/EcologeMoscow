@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/gmail"
+        android:layout_width="333dp"
+        android:layout_height="88dp"
+        android:ems="10"
+        android:hint="Gmail"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354" />
+
+    <EditText
+        android:id="@+id/passwordtext"
+        android:layout_width="334dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="92dp"
+        android:ems="10"
+        android:hint="Пароль"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/gmail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gmail"
+        app:layout_constraintTop_toTopOf="@+id/gmail" />
+
+    <TextView
+        android:id="@+id/логин"
+        android:layout_width="232dp"
+        android:layout_height="91dp"
+        android:layout_marginBottom="16dp"
+        android:text="Вход в систему"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/gmail"
+        app:layout_constraintEnd_toEndOf="@+id/gmail"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="@+id/gmail" />
+
+    <Button
+        android:id="@+id/ButtonSigning"
+        android:layout_width="159dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="88dp"
+        android:text="Вход"
+        app:layout_constraintEnd_toEndOf="@+id/passwordtext"
+        app:layout_constraintHorizontal_bias="0.01"
+        app:layout_constraintStart_toStartOf="@+id/passwordtext"
+        app:layout_constraintTop_toBottomOf="@+id/gmail" />
+
+    <TextView
+        android:id="@+id/backtoreg"
+        android:layout_width="132dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="76dp"
+        android:text="Вернуться к регистрации"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/passwordtext"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/passwordtext"
+        app:layout_constraintTop_toTopOf="@+id/ButtonSigning" />
+</androidx.constraintlayout.widget.ConstraintLayout>

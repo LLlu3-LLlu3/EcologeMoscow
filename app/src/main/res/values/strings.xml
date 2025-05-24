@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EcologeMoscow</string>
+    <string name="eco_place_image">Изображение экологического места</string>
+    <string name="location_icon">Иконка местоположения</string>
+    <string name="time_icon">Иконка времени</string>
+    <string name="error_loading_data">Ошибка загрузки данных</string>
+    <string name="retry">Повторить</string>
+    <string name="no_data">Нет данных для отображения</string>
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
+    <string name="my_location">Моё местоположение</string>
+</resources>
