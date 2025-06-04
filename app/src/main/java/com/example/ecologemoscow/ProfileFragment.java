@@ -15,13 +15,26 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
     private TextView emailTextView;
+    private TextView nameTextView;
     private Button loginButton;
     private Button logoutButton;
     private Button qrScanButton;
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private DatabaseReference userRef;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        userRef = FirebaseDatabase.getInstance().getReference("users");
+    }
 
     @Nullable
     @Override
@@ -29,6 +42,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.profil_l, container, false);
         
         emailTextView = view.findViewById(R.id.emailtext);
+        nameTextView = view.findViewById(R.id.name_text);
         loginButton = view.findViewById(R.id.butlogout);
         logoutButton = view.findViewById(R.id.qr_scan_button);
         qrScanButton = view.findViewById(R.id.qr_scan_button);
@@ -47,6 +61,29 @@ public class ProfileFragment extends Fragment {
             logoutButton.setVisibility(View.VISIBLE);
             qrScanButton.setVisibility(View.VISIBLE);
             
+            // Загружаем данные пользователя из Firebase
+            userRef.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String firstName = snapshot.child("firstName").getValue(String.class);
+                        String lastName = snapshot.child("lastName").getValue(String.class);
+                        String middleName = snapshot.child("middleName").getValue(String.class);
+                        
+                        if (firstName != null && lastName != null) {
+                            String fullName = String.format("%s %s %s", 
+                                lastName, firstName, middleName != null ? middleName : "");
+                            nameTextView.setText(fullName);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getContext(), "Ошибка загрузки данных", Toast.LENGTH_SHORT).show();
+                }
+            });
+            
             logoutButton.setText("выйти");
             logoutButton.setOnClickListener(v -> {
                 mAuth.signOut();
@@ -54,13 +91,11 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getContext(), "Вы вышли из аккаунта", Toast.LENGTH_SHORT).show();
             });
 
-            qrScanButton.setOnClickListener(v -> {
-                // Здесь будет логика сканирования QR-кода
-                Toast.makeText(getContext(), "Сканирование QR-кода", Toast.LENGTH_SHORT).show();
-            });
+
         } else {
             // Пользователь не авторизован
             emailTextView.setText("");
+            nameTextView.setText("");
             loginButton.setVisibility(View.VISIBLE);
             logoutButton.setVisibility(View.GONE);
             qrScanButton.setVisibility(View.GONE);

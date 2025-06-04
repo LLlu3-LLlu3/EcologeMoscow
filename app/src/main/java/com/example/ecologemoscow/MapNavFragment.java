@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,9 +57,12 @@ public class MapNavFragment extends Fragment implements OnMapReadyCallback {
     private ProgressBar progressBar;
     private TextView errorView;
     private Button retryButton;
+    private ImageButton toggleMapButton;
     private int retryCount = 0;
     private static final int MAX_RETRIES = 3;
     private Polygon southButovoPolygon;
+    private boolean isShopsMapVisible = false;
+    private ShopsFragment shopsFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +84,10 @@ public class MapNavFragment extends Fragment implements OnMapReadyCallback {
         progressBar = view.findViewById(R.id.progress_bar);
         errorView = view.findViewById(R.id.error_view);
         retryButton = view.findViewById(R.id.retry_button);
+        
+        // Инициализация кнопки переключения карт
+        toggleMapButton = view.findViewById(R.id.toggle_map_button);
+        toggleMapButton.setOnClickListener(v -> toggleMapView());
         
         retryButton.setOnClickListener(v -> {
             if (retryCount < MAX_RETRIES) {
@@ -394,6 +402,39 @@ public class MapNavFragment extends Fragment implements OnMapReadyCallback {
         } catch (Exception e) {
             Log.e(TAG, "showGraphForSouthButovo: Ошибка при открытии графика: " + e.getMessage(), e);
             Toast.makeText(getContext(), "Ошибка при открытии графика: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void toggleMapView() {
+        if (isShopsMapVisible) {
+            // Возвращаемся к карте района
+            if (shopsFragment != null) {
+                getChildFragmentManager().beginTransaction()
+                    .hide(shopsFragment)
+                    .commit();
+            }
+            View mapContainer = getView().findViewById(R.id.map_container);
+            if (mapContainer != null) {
+                mapContainer.setVisibility(View.VISIBLE);
+            }
+            isShopsMapVisible = false;
+        } else {
+            // Показываем карту магазинов
+            if (shopsFragment == null) {
+                shopsFragment = new ShopsFragment();
+                getChildFragmentManager().beginTransaction()
+                    .add(R.id.map_container, shopsFragment)
+                    .commit();
+            } else {
+                getChildFragmentManager().beginTransaction()
+                    .show(shopsFragment)
+                    .commit();
+            }
+            View mapContainer = getView().findViewById(R.id.map_container);
+            if (mapContainer != null) {
+                mapContainer.setVisibility(View.VISIBLE);
+            }
+            isShopsMapVisible = true;
         }
     }
 } 

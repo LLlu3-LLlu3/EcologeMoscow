@@ -4,47 +4,47 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- видоизменённая букашка-->
 
     <!-- Body -->
     <path
-        android:fillColor="#FF0000"
+        android:type="linear"
+        android:angle="135"
+        android:fillColor="@color/success"
         android:pathData="M54,35 A25,25 0 1,1 54,85 A25,25 0 1,1 54,35"/>
 
     <!-- Head -->
     <path
-        android:fillColor="#000000"
+        android:fillColor="#FFFFFF"
         android:pathData="M54,25 A10,10 0 1,1 54,45 A10,10 0 1,1 54,25"/>
 
     <!-- Left Wing Line -->
     <path
-        android:strokeColor="#000000"
-        android:strokeWidth="2"
-        android:pathData="M54,60 L54,35"/>
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:pathData="M54,69 L54,43"/>
 
     <!-- Spots -->
     <path
-        android:fillColor="#000000"
+        android:fillColor="#FFFFFF"
         android:pathData="M44,50 A4,4 0 1,1 44,58 A4,4 0 1,1 44,50"/>
     <path
-        android:fillColor="#000000"
+        android:fillColor="#FFFFFF"
         android:pathData="M64,50 A4,4 0 1,1 64,58 A4,4 0 1,1 64,50"/>
     <path
-        android:fillColor="#000000"
-        android:pathData="M54,65 A4,4 0 1,1 54,73 A4,4 0 1,1 54,65"/>
-    <path
-        android:fillColor="#000000"
+        android:fillColor="#FAFAFA"
         android:pathData="M44,70 A4,4 0 1,1 44,78 A4,4 0 1,1 44,70"/>
     <path
-        android:fillColor="#000000"
+        android:fillColor="#FFFFFF"
         android:pathData="M64,70 A4,4 0 1,1 64,78 A4,4 0 1,1 64,70"/>
 
     <!-- Antennae -->
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M48,30 L44,25"/>
     <path
-        android:strokeColor="#000000"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="2"
         android:pathData="M60,30 L64,25"/>
 </vector> 

@@ -43,6 +43,7 @@ public class EcoEventAdapter extends RecyclerView.Adapter<EcoEventAdapter.ViewHo
         
         TextView titleView = dialogView.findViewById(R.id.dialog_event_title);
         TextView dateView = dialogView.findViewById(R.id.dialog_event_date);
+        TextView addressView = dialogView.findViewById(R.id.dialog_event_address);
         TextView descriptionView = dialogView.findViewById(R.id.dialog_event_description);
         
         titleView.setText(event.getTitle());
@@ -66,12 +67,13 @@ public class EcoEventAdapter extends RecyclerView.Adapter<EcoEventAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title, date;
+        TextView title, date, address;
         
         ViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.event_title);
             date = itemView.findViewById(R.id.event_date);
+            address = itemView.findViewById(R.id.event_address);
         }
     }
 } 
