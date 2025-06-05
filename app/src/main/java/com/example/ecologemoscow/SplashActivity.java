@@ -24,21 +24,30 @@ public class SplashActivity extends AppCompatActivity {
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference mDatabase;
     private final Handler handler = new Handler(Looper.getMainLooper());
+    private static final int SPLASH_DELAY = 2000; // 2 секунды
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Инициализация анимации
-        animationView = findViewById(R.id.animationView);
-        
-        // Инициализация Firebase
-        // mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        
-        // Начало загрузки данных
-        loadData();
+        try {
+            // Инициализация анимации
+            animationView = findViewById(R.id.animationView);
+            if (animationView != null) {
+                animationView.setAnimation(R.raw.animation);
+                animationView.playAnimation();
+            }
+
+            // Инициализация Firebase
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            
+            // Начало загрузки данных
+            loadData();
+        } catch (Exception e) {
+            Log.e(TAG, "Error in onCreate: " + e.getMessage());
+            handler.postDelayed(this::goToMainActivity, SPLASH_DELAY);
+        }
     }
     
     private void loadData() {
@@ -55,17 +64,17 @@ public class SplashActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.e(TAG, "Error loading user data", databaseError.toException());
+                        Log.e(TAG, "Error loading user data: " + databaseError.getMessage());
                         finishLoading();
                     }
                 });
             } else {
                 // Пользователь не авторизован
-                handler.postDelayed(this::finishLoading, 3000);
+                handler.postDelayed(this::finishLoading, SPLASH_DELAY);
             }
         } catch (Exception e) {
-            Log.e(TAG, "Error in loadData", e);
-            handler.postDelayed(this::finishLoading, 3000);
+            Log.e(TAG, "Error in loadData: " + e.getMessage());
+            handler.postDelayed(this::finishLoading, SPLASH_DELAY);
         }
     }
     
@@ -82,7 +91,7 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } catch (Exception e) {
-            Log.e(TAG, "Error starting MainActivity", e);
+            Log.e(TAG, "Error starting MainActivity: " + e.getMessage());
             Toast.makeText(this, "Ошибка запуска приложения", Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -91,6 +100,11 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacksAndMessages(null);
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+        }
+        if (animationView != null) {
+            animationView.cancelAnimation();
+        }
     }
 }

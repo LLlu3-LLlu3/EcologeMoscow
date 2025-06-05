@@ -80,4 +80,12 @@
         <item name="android:textColor">@color/primary_dark</item>
         <item name="android:textSize">20sp</item>
     </style>
+
+    <!-- Тема без ActionBar для SplashActivity -->
+    <style name="Theme.EcologeMoscow.NoActionBar" parent="Theme.EcologeMoscow">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

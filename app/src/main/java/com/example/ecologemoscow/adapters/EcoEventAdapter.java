@@ -48,6 +48,7 @@ public class EcoEventAdapter extends RecyclerView.Adapter<EcoEventAdapter.ViewHo
         
         titleView.setText(event.getTitle());
         dateView.setText(event.getDate());
+
         descriptionView.setText(event.getDescription());
         
         new MaterialAlertDialogBuilder(context)

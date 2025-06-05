@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,12 +47,23 @@ public class CreateEventActivity extends AppCompatActivity {
             return;
         }
 
-
-        String eventId = title;
-
-
-        Event event = new Event(eventId, title, description, address, time, null);
+        String eventId = UUID.randomUUID().toString();
+        String creatorId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         
+        Event event = new Event(
+            eventId,
+            title,
+            description,
+            address,
+            time,
+            null, // imageUri
+            creatorId,
+            "", // creatorFirstName
+            "", // creatorLastName
+            "", // creatorMiddleName
+            false, // isCityEvent
+            "user" // type - пользовательское событие
+        );
 
         eventsRef.child(eventId).setValue(event)
                 .addOnSuccessListener(aVoid -> {

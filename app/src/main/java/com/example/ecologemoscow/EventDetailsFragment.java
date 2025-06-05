@@ -21,9 +21,14 @@ public class EventDetailsFragment extends Fragment {
         args.putString("event_id", event.getId());
         args.putString("event_title", event.getTitle());
         args.putString("event_description", event.getDescription());
-        args.putString("event_address", event.getAddress());
-        args.putString("event_time", event.getTime());
+        args.putString("event_location", event.getLocation());
+        args.putString("event_date", event.getDate());
         args.putString("event_image", event.getImageUri());
+        args.putString("creator_id", event.getCreatorId());
+        args.putString("creator_first_name", event.getCreatorFirstName());
+        args.putString("creator_last_name", event.getCreatorLastName());
+        args.putString("creator_middle_name", event.getCreatorMiddleName());
+        args.putBoolean("is_city_event", event.isCityEvent());
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,9 +41,15 @@ public class EventDetailsFragment extends Fragment {
                 getArguments().getString("event_id"),
                 getArguments().getString("event_title"),
                 getArguments().getString("event_description"),
-                getArguments().getString("event_address"),
-                getArguments().getString("event_time"),
-                getArguments().getString("event_image")
+                getArguments().getString("event_location"),
+                getArguments().getString("event_date"),
+                getArguments().getString("event_image"),
+                getArguments().getString("creator_id"),
+                getArguments().getString("creator_first_name"),
+                getArguments().getString("creator_last_name"),
+                getArguments().getString("creator_middle_name"),
+                getArguments().getBoolean("is_city_event"),
+                getArguments().getBoolean("is_city_event") ? "city" : "user"
             );
         }
     }
@@ -55,17 +66,24 @@ public class EventDetailsFragment extends Fragment {
 
         ImageView imageView = view.findViewById(R.id.event_image);
         TextView titleTextView = view.findViewById(R.id.event_title);
-        TextView timeTextView = view.findViewById(R.id.event_time);
-        TextView addressTextView = view.findViewById(R.id.event_address);
+        TextView dateTextView = view.findViewById(R.id.event_date);
+        TextView locationTextView = view.findViewById(R.id.event_location);
         TextView descriptionTextView = view.findViewById(R.id.event_description);
+        TextView creatorTextView = view.findViewById(R.id.event_creator);
 
         if (event != null) {
             titleTextView.setText(event.getTitle());
-            timeTextView.setText(event.getTime());
-            addressTextView.setText(event.getAddress());
+            dateTextView.setText(event.getDate());
+            locationTextView.setText(event.getLocation());
             descriptionTextView.setText(event.getDescription());
+            creatorTextView.setText(event.getCreatorFullName());
 
-            imageView.setImageResource(R.drawable.default_image_background);
+            if (event.getImageUri() != null && !event.getImageUri().isEmpty()) {
+                // Здесь можно добавить загрузку изображения с помощью Glide или Picasso
+                imageView.setImageResource(R.drawable.default_image_background);
+            } else {
+                imageView.setImageResource(R.drawable.default_image_background);
+            }
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
     }

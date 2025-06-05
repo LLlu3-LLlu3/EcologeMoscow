@@ -30,7 +30,6 @@ public class BottomNavFragment extends Fragment {
 
         // Обработка нажатий
         btnEvents.setOnClickListener(v -> navigateToFragment(new EventsFragment()));
-        btnShops.setOnClickListener(v -> navigateToFragment(new ShopsFragment()));
         btnMap.setOnClickListener(v -> navigateToFragment(new MapNavFragment()));
         btnSettings.setOnClickListener(v -> registerSettingsClick());
 
